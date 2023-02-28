@@ -17,6 +17,7 @@ steps:
       - '-c'
       - |
         buildNumber=$(cat _BUILDNUMBER)
+        echo "Build Number is ${buildNumber}"
         ls
         bash ~/submit.sh DataflowDemoPipeline \
           --project=kissam-testing-project \
