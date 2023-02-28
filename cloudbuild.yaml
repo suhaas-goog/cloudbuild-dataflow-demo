@@ -17,7 +17,7 @@ steps:
       - '-c'
       - |
         buildNumber=$(cat _BUILDNUMBER)
-        submit.sh DataflowDemoPipeline \
+        bash ./submit.sh DataflowDemoPipeline \
           --project=kissam-testing-project \
           --stagingLocation=gs://test-bucket-dg/ \
           --gcpTempLocation=gs://test-bucket-dg/ \
