@@ -19,4 +19,15 @@ steps:
         buildNumber=$(cat _BUILDNUMBER)
         pwd
         echo "Build Number is ${buildNumber}"
+        ./submit.sh DataflowDemoPipeline \
+          --project=kissam-testing-project \
+          --stagingLocation=gs://test-bucket-dg/stage/ \
+          --gcpTempLocation=gs://test-bucket-dg/temp/ \
+          --runner=DataflowRunner \
+          --autoscalingAlgorithm=THROUGHPUT_BASED \
+          --maxNumWorkers=10 \
+          --jobName=demo \
+          --buildNumber=${buildNumber} \
+          --subscription=sub1 \
+          --region=us-west1
     waitFor: ['get build number']
