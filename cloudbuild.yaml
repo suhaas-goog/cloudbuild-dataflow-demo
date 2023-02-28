@@ -15,10 +15,9 @@ steps:
     args:
       - '-c'
       - |
-        buildNumber=$(cat _BUILDNUMBER)
         pwd
-        echo "Build Number is ${buildNumber}"
-        ./submit.sh DataflowDemoPipeline \
+        ls
+        bash submit.sh DataflowDemoPipeline \
           --project=kissam-testing-project \
           --stagingLocation=gs://test-bucket-dg/stage/ \
           --gcpTempLocation=gs://test-bucket-dg/temp/ \
