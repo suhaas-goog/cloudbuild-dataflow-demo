@@ -11,6 +11,7 @@ steps:
 
   - id: "build and submit the dataflow job"
     name: maven:3.6.0-jdk-11-slim
+    dir: '/workspace/streaming'
     entrypoint: 'bash'
     args:
       - '-c'
