@@ -18,5 +18,5 @@ steps:
       - |
         buildNumber=$(cat _BUILDNUMBER)
         echo "Build Number is ${buildNumber}"
-        ls
+        ls ./_BUILDNUMBER
     waitFor: ['get build number']
