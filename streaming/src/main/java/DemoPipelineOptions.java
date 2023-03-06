@@ -3,6 +3,7 @@ import org.apache.beam.sdk.options.Default;
 import org.apache.beam.sdk.options.Description;
 import org.apache.beam.sdk.options.PipelineOptions;
 
+@Hidden
 public interface DemoPipelineOptions extends DataflowPipelineOptions {
     @Description("Subscription name")
     @Default.String("dataflow_subscription")
