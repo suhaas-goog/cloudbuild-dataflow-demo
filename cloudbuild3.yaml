@@ -10,7 +10,7 @@ steps:
     waitFor: ['-']
 
   - id: "build and submit the dataflow job"
-    name: us-west1-docker.pkg.dev/kissam-testing-project/myimg:latest
+    name: us-west1-docker.pkg.dev/kissam-testing-project/myrepo/myimg:latest
     dir: '/workspace/streaming'
     entrypoint: 'bash'
     args:
