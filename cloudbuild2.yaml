@@ -12,6 +12,8 @@ steps:
   
   - id: "upgrade beam"
     name: python
+    dir: 'cloudbuild-dataflow-demo/streaming'
+    entrypoint: python
     args: ["-m", "pip", "install", "--upgrade", "apache-beam"]
    
   - id: "build and submit the dataflow job"
