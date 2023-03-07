@@ -33,4 +33,4 @@ steps:
           --job_name=demo \
           --topic=projects/kissam-testing-project/topics/topico \
           --region=us-west1
-    waitFor: ['get build number', 'upgrade pip', 'upgrade beam']
+    waitFor: ['get build number', 'upgrade beam']
