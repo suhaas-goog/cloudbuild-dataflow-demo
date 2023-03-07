@@ -12,7 +12,6 @@ steps:
   - id: "check python version"
     name: bash
     dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: bash
     script: python --version
     
 
