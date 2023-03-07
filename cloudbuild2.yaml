@@ -9,6 +9,13 @@ steps:
         git rev-parse --short HEAD > _BUILDNUMBER
     waitFor: ['-']
 
+  - id: "check python version"
+    name: gcr.io/cloud-builders/git
+    dir: 'cloudbuild-dataflow-demo/streaming'
+    entrypoint: 'bash'
+    args: ["python", "--version"]
+    
+
   - id: "upgrade wheel"
     name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
