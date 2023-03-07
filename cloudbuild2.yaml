@@ -10,33 +10,33 @@ steps:
     waitFor: ['-']
 
   - id: "upgrade wheel"
-    name: python3
+    name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python3
+    entrypoint: python
     args: ["-m", "pip", "install", "--upgrade", "wheel"]
     
   - id: "upgrade numpy"
-    name: python3
+    name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python3
+    entrypoint: python
     args: ["-m", "pip", "install", "--upgrade", "numpy"]
     
   - id: "upgrade pyarrow"
-    name: python3
+    name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python3
-    args: ["-m", "pip", "install", "pyarrow"]
+    entrypoint: python
+    args: ["-m", "pip", "install", "--upgrade", "pyarrow"]
     waitFor: ['upgrade wheel', 'upgrade numpy']
     
   - id: "upgrade beam"
-    name: python3
+    name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python3
+    entrypoint: python
     args: ["-m", "pip", "install", "apache-beam[gcp]"]
     waitFor: ['upgrade wheel', 'upgrade numpy']
    
   - id: "build and submit the dataflow job"
-    name: python3
+    name: python
     dir: '/workspace/streaming'
     entrypoint: 'bash'
     args:
