@@ -9,14 +9,6 @@ steps:
         git rev-parse --short HEAD > _BUILDNUMBER
     waitFor: ['-']
 
-  - id: "build runtime"
-    waitFor: ['-']
-    name: gcr.io/cloud-builders/docker
-    args:
-      - build
-      - -t
-      - my-runtime
-      - runtime
   - id: "build and submit the dataflow job"
     name: us-west1-docker.pkg.dev/kissam-testing-project/myimg:latest
     dir: '/workspace/streaming'
@@ -36,4 +28,4 @@ steps:
           --job_name=demo \
           --topic=projects/kissam-testing-project/topics/topico \
           --region=us-west1
-    waitFor: ['get build number', 'build runtime']
+    waitFor: ['get build number']
