@@ -20,7 +20,7 @@ steps:
     dir: 'cloudbuild-dataflow-demo/streaming'
     entrypoint: python
     args: ["-m", "pip", "install", "--upgrade", "apache-beam"]
-    waitFor: ['upgrade numpy']
+    waitFor: ['upgrade wheel']
    
   - id: "build and submit the dataflow job"
     name: python
