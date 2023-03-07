@@ -12,7 +12,7 @@ steps:
   - id: "upgrade wheel"
     name: python3
     dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python
+    entrypoint: python3
     args: ["-m", "pip", "install", "--upgrade", "wheel"]
     
   - id: "upgrade numpy"
