@@ -10,7 +10,7 @@ steps:
     waitFor: ['-']
 
   - id: "check python version"
-    name: gcr.io/cloud-builders/git
+    name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
     entrypoint: 'bash'
     args: ["python", "--version"]
