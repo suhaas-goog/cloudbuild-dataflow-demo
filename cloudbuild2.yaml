@@ -8,7 +8,15 @@ steps:
       - |
         git rev-parse --short HEAD > _BUILDNUMBER
     waitFor: ['-']
-
+    
+  - id: "upgrade pip"
+    name: python
+    args: ["-m", "pip", "install", "--upgrade", "pip"]
+  
+  - id: "upgrade beam"
+    name: python
+    args: ["-m", "pip", "install", "--upgrade", "apache-beam"]
+   
   - id: "build and submit the dataflow job"
     name: python
     dir: '/workspace/streaming'
@@ -28,4 +36,4 @@ steps:
           --job_name=demo \
           --topic=projects/kissam-testing-project/topics/topico \
           --region=us-west1
-    waitFor: ['get build number']
+    waitFor: ['get build number', 'upgrade pip', 'upgrade beam']
