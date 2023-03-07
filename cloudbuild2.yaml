@@ -25,7 +25,7 @@ steps:
     name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
     entrypoint: python
-    args: ["-m", "pip", "install", "--upgrade", "apache-beam[gcp]"]
+    args: ["-m", "pip", "install", "apache-beam[gcp]"]
     waitFor: ['upgrade wheel', 'upgrade numpy']
    
   - id: "build and submit the dataflow job"
