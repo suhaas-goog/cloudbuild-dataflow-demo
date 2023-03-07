@@ -10,9 +10,10 @@ steps:
     waitFor: ['-']
 
   - id: "check python version"
-    name: bash
+    name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
-    script: python --version
+    entrypoint: python
+    args: ["--version"]
     
 
   - id: "upgrade wheel"
