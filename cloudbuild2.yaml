@@ -9,12 +9,18 @@ steps:
         git rev-parse --short HEAD > _BUILDNUMBER
     waitFor: ['-']
 
-  
+  - id: "upgrade numpy"
+    name: python
+    dir: 'cloudbuild-dataflow-demo/streaming'
+    entrypoint: python
+    args: ["-m", "pip", "install", "--upgrade", "numpy"]
+    
   - id: "upgrade beam"
     name: python
     dir: 'cloudbuild-dataflow-demo/streaming'
     entrypoint: python
     args: ["-m", "pip", "install", "--upgrade", "apache-beam"]
+    waitFor: ['upgrade numpy']
    
   - id: "build and submit the dataflow job"
     name: python
