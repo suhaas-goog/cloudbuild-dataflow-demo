@@ -1,0 +1,31 @@
+steps:
+  - id: "get build number"
+    name: gcr.io/cloud-builders/git
+    dir: 'cloudbuild-dataflow-demo/streaming'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        git rev-parse --short HEAD > _BUILDNUMBER
+    waitFor: ['-']
+
+  - id: "build and submit the dataflow job"
+    name: python
+    dir: '/workspace/streaming'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        pwd
+        ls
+        bash submit2.sh main.py \
+          --project=kissam-testing-project \
+          --staging_location=gs://test-bucket-dg/stage/ \
+          --temp_location=gs://test-bucket-dg/temp/ \
+          --runner=DataflowRunner \
+          --autoscaling_algorithm=THROUGHPUT_BASED \
+          --max_num_workers=10 \
+          --job_name=demo \
+          --topic=projects/kissam-testing-project/topics/topico \
+          --region=us-west1
+    waitFor: ['get build number']
