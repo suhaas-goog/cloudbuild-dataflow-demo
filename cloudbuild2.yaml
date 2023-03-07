@@ -9,41 +9,16 @@ steps:
         git rev-parse --short HEAD > _BUILDNUMBER
     waitFor: ['-']
 
-  - id: "check python version"
-    name: python
-    dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python
-    args: ["--version"]
-    
-
-  - id: "upgrade wheel"
-    name: python
-    dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python
-    args: ["-m", "pip", "install", "--upgrade", "wheel"]
-    
-  - id: "upgrade numpy"
-    name: python
-    dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python
-    args: ["-m", "pip", "install", "--upgrade", "numpy"]
-    
-  - id: "upgrade pyarrow"
-    name: python
-    dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python
-    args: ["-m", "pip", "install", "--upgrade", "pyarrow"]
-    waitFor: ['upgrade wheel', 'upgrade numpy']
-    
-  - id: "upgrade beam"
-    name: python
-    dir: 'cloudbuild-dataflow-demo/streaming'
-    entrypoint: python
-    args: ["-m", "pip", "install", "apache-beam[gcp]"]
-    waitFor: ['upgrade wheel', 'upgrade numpy']
-   
+  - id: "build runtime"
+    waitFor: ['-']
+    name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - my-runtime
+      - runtime
   - id: "build and submit the dataflow job"
-    name: python
+    name: my-runtime
     dir: '/workspace/streaming'
     entrypoint: 'bash'
     args:
@@ -52,7 +27,7 @@ steps:
         pwd
         ls
         bash submit2.sh main.py \
-          --project=kissam-testing-project \
+          --project=$PROJECT_ID \
           --staging_location=gs://test-bucket-dg/stage/ \
           --temp_location=gs://test-bucket-dg/temp/ \
           --runner=DataflowRunner \
@@ -61,4 +36,4 @@ steps:
           --job_name=demo \
           --topic=projects/kissam-testing-project/topics/topico \
           --region=us-west1
-    waitFor: ['get build number', 'upgrade beam']
+    waitFor: ['get build number', 'build runtime']
