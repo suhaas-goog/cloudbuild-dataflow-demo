@@ -25,7 +25,7 @@ steps:
           --runner=DataflowRunner \
           --autoscaling_algorithm=THROUGHPUT_BASED \
           --max_num_workers=10 \
-          --job_name=demo \
+          --job_name=demo5 \
           --topic=projects/kissam-testing-project/topics/topico \
           --region=us-west1
     waitFor: ['get build number']
