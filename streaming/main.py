@@ -48,9 +48,9 @@ def run():
   options = WritePubSubOptions(streaming=True)
 
   
-  #p = beam.Pipeline(options=options)
-  with beam.Pipeline(options=options) as p:
-    (p | "Read from PubSub" >> ReadFromPubSub(topic=input_topic)
+  p = beam.Pipeline(options=options)
+  #with beam.Pipeline(options=options) as p:
+  (p | "Read from PubSub" >> ReadFromPubSub(topic=input_topic)
      | "EncodeString" >> ParDo(PubsubToPubsub())
      | "Write to PubSub" >> WriteToPubSub(topic=options.topic))
 
